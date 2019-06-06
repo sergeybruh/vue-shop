@@ -12,17 +12,14 @@ export default new Vuex.Store({
       {name: "item3", price: 130, id: 2, amount: 1},
       {name: "item4", price: 140, id: 3, amount: 1},
     ],
-    cartObj: [ ],
-    regObj: {
-      
-    }
+    cartObj: [],
+    regObj: [],   
   },
-  mutations: {
+  mutations: { 
     addToCart(state, payload) {
       let toggle = false;
       state.cartObj.forEach((el)=> {
         if(el.id == state.productsList[payload].id) {
-        //console.log("found the same", el.id, state.cartObj[el.id].amount);
          state.cartObj[el.id].amount = (state.cartObj[el.id].amount + 1)
           toggle=true;
         }
@@ -55,7 +52,10 @@ export default new Vuex.Store({
         }
       });
     },
-
+    addUser(state, payload) {
+      state.regObj = payload;
+      console.log(state.regObj.pwd, state.regObj.eml);
+    },
   },
   actions: {
     
