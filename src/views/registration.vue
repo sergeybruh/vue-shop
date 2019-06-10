@@ -6,7 +6,10 @@
         <form @submit="checkForm($event)">
           <div class="form-group">
             <label for="exampleInputEmail1">Email address</label>
-            <input required="required" v-model="eml" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+            <input v-validate="'required|email'" name="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+          </div>
+          <div v-if="errors.first('email')" class="alert alert-danger" role="alert">
+            {{ errors.first('email') }}
           </div>
           <div class="form-group">
             <label for="exampleInputPassword1">Password</label>
@@ -41,34 +44,30 @@
       </div>
     </div>
   </div>
- 
 </template>
 
 <script>
-
-
 export default {
   name: "registration",
-  data: function () {
+  data: function() {
     return {
       pwd: "",
       pwd2: "",
       eml: "",
       popupToggle: false,
       showUnvalidPassword: false,
-      showUnvalidLenght: false,
-    }
+      showUnvalidLenght: false
+    };
   },
   methods: {
     killPopup() {
-      this.popupToggle = !popupToggle;
+      this.popupToggle = !this.popupToggle;
     },
     checkForm(event) {
-      event.preventDefault()
+      event.preventDefault();
       if (this.pwd != this.pwd2) {
         this.showUnvalidPassword = true;
-      } 
-      else if (this.pwd == "" || this.pwd2 == "") {
+      } else if (this.pwd == "" || this.pwd2 == "") {
         this.showUnvalidPassword = true;
       }
       // else if (this.pwd.lenght < 8) {
@@ -78,24 +77,23 @@ export default {
         this.showUnvalidPassword = false;
         this.popupToggle = true;
         this.showUnvalidLenght = false;
-          this.$store.commit('addUser', {
-            pwd: this.pwd,
-            eml: this.eml
-          });
-      }    
+        this.$store.commit("addUser", {
+          pwd: this.pwd,
+          eml: this.eml
+        });
+      }
     }
   }
 };
 </script>
 
 <style lang="scss">
-  .form-group {
-    label {
-      float: left;
-    }
-    #emailHelp {}
-    .btn  {
-      float: left;
-    }
+.form-group {
+  label {
+    float: left;
   }
+  .btn {
+    float: left;
+  }
+}
 </style>
