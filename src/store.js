@@ -18,7 +18,7 @@ export default new Vuex.Store({
   mutations: {
     addToCart(state, payload) {
       let toggle = true;
-      state.cartObj.forEach((el,i) => {
+      state.cartObj.forEach((el, i) => {
         if (i === state.productsList[payload].id) {
           state.cartObj[i].amount = state.cartObj[i].amount + 1;
           toggle = false;

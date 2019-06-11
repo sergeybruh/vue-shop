@@ -1,16 +1,20 @@
 <template>
   <div class="home container">
     <h1>Welcome to VUE shop</h1>
-    <productsList  />
+    <productsList></productsList>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 import productsList from "@/components/productsList.vue";
-
 export default {
   name: "home",
+  data: function() {
+    return {
+
+    };
+  },
   components: {
     productsList
   }

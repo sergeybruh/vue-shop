@@ -30,7 +30,7 @@
         </form>
       </div>
     </div>
-    <popup :toggle=popupToggle :title=popupMessage @closePopup="killPopup()"></popup>
+    <popup :toggle="popupToggle" :title="popupMessage" @closePopup="killPopup()"></popup>
   </div>
 </template>
 <script>
@@ -43,7 +43,7 @@ export default {
       pwd2: "",
       eml: "",
       popupMessage: "",
-      popupToggle: false,
+      popupToggle: false
     };
   },
   methods: {
@@ -58,8 +58,8 @@ export default {
         if (result) {
           this.popupToggle = true;
           this.$store.commit("addUser", {
-              pwd: this.pwd,
-              eml: this.eml
+            pwd: this.pwd,
+            eml: this.eml
           });
           this.popupMessage = "Thank you for registration";
           return;
