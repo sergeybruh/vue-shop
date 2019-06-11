@@ -46,7 +46,7 @@ export default new Vuex.Store({
       state.cartObj.forEach((el, i) => {
         if (el.id == payload) {
           state.cartObj[i].amount--;
-          if (state.cartObj[i].amount == 0) {
+          if (state.cartObj[i].amount == 0 || state.cartObj[i].amount < 0) {
             state.cartObj.splice(i, 1);
           }
         }
