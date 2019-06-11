@@ -6,7 +6,7 @@
         <form @submit.prevent="validateBeforeSubmit">
           <div class="form-group">
             <label for="exampleInputEmail1">Email address</label>
-            <input v-validate="'required|email'" name="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+            <input v-model="eml" v-validate="'required|email'" name="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
           </div>
           <div v-if="errors.has('email')" class="alert alert-danger" role="alert">
             {{ errors.first('email') }}
@@ -14,7 +14,7 @@
           
           <div class="form-group">
             <label for="exampleInputPassword1">Password</label>
-            <input v-validate="'required|min:8'" name="password" type="password"  class="form-control" id="exampleInputPassword1" :class="{'is-danger': errors.has('password')}" placeholder="Password" ref="password">
+            <input v-model="pwd" v-validate="'required|min:8'" name="password" type="password"  class="form-control" id="exampleInputPassword1" :class="{'is-danger': errors.has('password')}" placeholder="Password" ref="password">
           </div>
           <div v-if="errors.has('password')" class="alert alert-danger" role="alert">
             {{ errors.first('password') }}
@@ -44,8 +44,6 @@ export default {
       eml: "",
       popupMessage: "",
       popupToggle: false,
-      showUnvalidPassword: false,
-      showUnvalidLenght: false
     };
   },
   methods: {
@@ -56,7 +54,7 @@ export default {
       event.preventDefault();
     },
     validateBeforeSubmit() {
-      this.$validator.validateAll().then((result) => {
+      this.$validator.validateAll().then(result => {
         if (result) {
           this.popupToggle = true;
           this.$store.commit("addUser", {

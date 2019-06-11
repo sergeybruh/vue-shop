@@ -1,6 +1,6 @@
 <template>
   <div class="about container">
-    <h1>This is list of products you've added to cart</h1>
+    <h1 class="myTitle">This is list of products you've added to cart</h1>
   
     <div class="about row">
       <div class="col-3" v-for="item in getProductList">
@@ -62,5 +62,13 @@ export default {
   }
 };
 </script>
+
+<style>
+.myTitle {
+  padding-top: 20px;
+  padding-bottom: 30px;
+}
+</style>
+
 
 
